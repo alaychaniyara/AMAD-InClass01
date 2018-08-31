@@ -27,7 +27,11 @@ router.post("/signup", (req, res, next) => {
                         const user = new User({
                             _id: new mongoose.Types.ObjectId(),
                             email: req.body.email,
-                            password: hash
+                            password: hash,
+                            name:req.body.name,
+                            age:req.body.age,
+                            dateofbirth:req.body.dateofbirth,
+                            address:req.body.address
                         });
                         user
                             .save()
@@ -35,6 +39,7 @@ router.post("/signup", (req, res, next) => {
                                 console.log(result);
                                 res.status(201).json({
                                     message: "New User Succesfully Created"
+
                                 });
                             })
                             .catch(err => {
@@ -59,6 +64,7 @@ router.post("/login", (req, res, next) => {
                     message: " No User with email" +req.body.email+" found."
                 });
             }
+
             bcrypt.compare(req.body.password, user[0].password, (err, result) => {
                 if (err) {
                     return res.status(401).json({
@@ -69,7 +75,12 @@ router.post("/login", (req, res, next) => {
                     const token = jwt.sign(
                         {
                             email: user[0].email,
-                            userId: user[0]._id
+                            userId: user[0]._id,
+                            name: user[0].name,
+                            age: user[0].age,
+                            dateofbirth: user[0].dateofbirth,
+                            address: user[0].address
+
                         },
                         process.env.JWT_KEY,
                         {
@@ -78,7 +89,8 @@ router.post("/login", (req, res, next) => {
                     );
                     return res.status(200).json({
                         message: "You have successfully Logged In System",
-                        token: token
+                        token: token,
+
                     });
                 }
                 res.status(401).json({
