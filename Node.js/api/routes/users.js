@@ -3,9 +3,16 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt= require('jsonwebtoken');
-
+const checkauth=require('../authorisation-token/check-auth');
 
 const User= require('../models/user');
+var token=null;
+userdata= new User();
+    router.get("/", (req, res, next) => {
+    return res.status(200).json({
+        message: "Welcome"
+    });
+});
 
 //SIGNUP API
 
@@ -72,10 +79,11 @@ router.post("/login", (req, res, next) => {
                     });
                 }
                 if (result) {
-                    const token = jwt.sign(
+
+                    token = jwt.sign(
                         {
-                            email: user[0].email,
                             userId: user[0]._id,
+                            email: user[0].email,
                             name: user[0].name,
                             age: user[0].age,
                             dateofbirth: user[0].dateofbirth,
@@ -105,8 +113,69 @@ router.post("/login", (req, res, next) => {
             });
         });
 });
+//To get User Information from API
+/*
+router.get('/userinfo', function(req, res) {
+    //var token = req.headers['x-access-token'];
 
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
+    jwt.verify(token, config.secret, function(err, decoded) {
+        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+        res.status(200).send(decoded);
+    });
+});
+*/
+router.get("/userinfo",checkauth,(req, res, next) => {
+    User.findById(res.udata.userId)
+        .exec()
+        .then(user => {
+            if (!user) {
+                return res.status(404).json({
+                    message: "User Data not found"
+                });
+            }
+            res.status(200).json({
+                user: user,
+              /*  request: {
+                    type: "GET",
+                    url: "http://localhost:3000/users/"
+                }*/
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+//To Update the User Info
+router.patch("/updateuser",checkauth, (req, res, next) => {
+    const id = res.udata.userId;
+    const updateOps = {};
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
+    User.update({ _id: id }, { $set: updateOps })
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'User information updated',
+             /*   request: {
+                    type: 'GET',
+                    url: 'http://localhost:3000/products/' + id
+                }*/
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
 //To Delete a specific User from Database
 
 router.delete("/:userId", (req, res, next) => {
@@ -125,3 +194,6 @@ router.delete("/:userId", (req, res, next) => {
         });
 });
 module.exports = router;
+
+
+//update
