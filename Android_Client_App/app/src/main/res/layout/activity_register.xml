@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="57dp"
         android:layout_marginTop="90dp"
-        android:text="UserName" />
+        android:text="Email" />
 
     <TextView
         android:id="@+id/textView4"
@@ -32,7 +32,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textView"
         android:layout_marginTop="199dp"
-        android:text="User Id" />
+        android:text="Name" />
 
     <TextView
         android:id="@+id/textView6"
@@ -50,7 +50,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textView"
         android:layout_marginBottom="259dp"
-        android:text="Weight" />
+        android:text="Date of Birth" />
 
     <EditText
         android:id="@+id/txtname"
@@ -60,7 +60,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="33dp"
         android:ems="10"
-        android:hint="Enter Name"
+        android:hint="Enter Email"
         android:inputType="textPersonName" />
 
     <EditText
@@ -80,7 +80,7 @@
         android:layout_alignBaseline="@+id/textView5"
         android:layout_alignStart="@+id/txtname"
         android:ems="10"
-        android:hint="Enter userId"
+        android:hint="Enter Name"
         android:inputType="textPersonName" />
 
     <EditText
@@ -94,14 +94,15 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/txtWeight"
+        android:id="@+id/txtDOB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView7"
         android:layout_alignStart="@+id/txtname"
         android:ems="10"
-        android:hint="Enter weight"
+        android:hint="Enter Date of Birth"
         android:inputType="textPersonName" />
+
 
     <Button
         android:id="@+id/btnCreateUser"
@@ -111,5 +112,24 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="136dp"
         android:layout_marginStart="136dp"
-        tools:text="Create User" />
+        android:text="Create User" />
+
+    <TextView
+        android:id="@+id/textViewaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView6"
+        android:layout_below="@+id/txtage"
+        android:text="Address" />
+
+    <EditText
+        android:id="@+id/editTextAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewaddress"
+        android:layout_alignBottom="@+id/textViewaddress"
+        android:layout_alignStart="@+id/txtage"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Enter Address" />
 </RelativeLayout>

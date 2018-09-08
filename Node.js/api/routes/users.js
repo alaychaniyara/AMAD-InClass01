@@ -97,7 +97,7 @@ router.post("/login", (req, res, next) => {
                     );
                     return res.status(200).json({
                         message: "You have successfully Logged In System",
-                        token: token,
+                        token: token
 
                     });
                 }

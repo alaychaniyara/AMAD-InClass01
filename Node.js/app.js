@@ -4,13 +4,17 @@ const morgan= require('morgan');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const userRoutes= require('./api/routes/users');
-
+try{
  mongoose.connect(
      'mongodb+srv://amad-user:'+process.env.MONGO_ATLAS_PW+'@advance-mad-6lt06.mongodb.net/test?retryWrites=true',
      {
          useNewUrlParser: true
      }
- );
+ );}catch (error) {
+    return res.status(401).json({
+        message: 'Server COnnect Fail'
+    });
+}
  mongoose.Promise = global.Promise;
 
 
