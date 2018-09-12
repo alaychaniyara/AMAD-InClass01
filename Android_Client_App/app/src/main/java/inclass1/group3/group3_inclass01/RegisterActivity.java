@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 //import inclass1.group3.group3_inclass01.data.Person;
@@ -25,13 +28,17 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static inclass1.group3.group3_inclass01.MainActivity.api_ip;
+
 public class RegisterActivity extends AppCompatActivity {
 
     public static final int REGISTER_USER = 100;
+  String message ;
 
     private final OkHttpClient client = new OkHttpClient();
 
     public ProgressDialog progressDialog;
+    String token;
 
     EditText name,email,pwd,age,address,dateofbirth;
 
@@ -52,26 +59,26 @@ public class RegisterActivity extends AppCompatActivity {
         findViewById(R.id.btnCreateUser).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Users.User newPerson = new Users.User();
-               newPerson.setEmail(email.toString());
-               newPerson.setPassword(pwd.toString());
-                newPerson.setName(name.toString());
-                newPerson.setAge(age.toString());
-                newPerson.setDateofbirth(dateofbirth.toString());
-                newPerson.setAddress(address.toString());
-              //  newPerson.(name.getText().toString());
+              TokenResponse newPerson = new TokenResponse();
+               newPerson.setEmail(email.getText().toString());
+               newPerson.setPassword(pwd.getText().toString());
+                newPerson.setName(name.getText().toString());
+                newPerson.setAge(age.getText().toString());
+                newPerson.setDateofbirth(dateofbirth.getText().toString());
+                newPerson.setAddress(address.getText().toString());
                //make the api call here...
                 progressDialog = new ProgressDialog(RegisterActivity.this);
                 progressDialog.setTitle("Registering user... please wait");
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 progressDialog.show();
+                Log.d("123456",newPerson.toString());
                 performRegister(newPerson);
             }
         });
 
     }
 
-    private void performRegister(final Users.User newPerson) {
+    private void performRegister(final TokenResponse newPerson) {
 
         JsonObject jsonObject= new JsonObject();
         jsonObject.addProperty("email",newPerson.getEmail());
@@ -84,15 +91,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         RequestBody formBody = RequestBody.create(JSON,jsonObject.toString());
 
-     /*   RequestBody formBody = new FormBody.Builder()
-                .add("userName", newPerson.getUserName())
-                .add("userId", newPerson.getUserId())
-                .add("password", newPerson.getPassword())
-                .add("age", String.valueOf(newPerson.getAge()))
-                .add("weight", String.valueOf(newPerson.getWeight()))
-                .build();*/
         Request request = new Request.Builder()
-                .url("http://52.23.253.255:3000/users/signup")
+                .url("http://"+api_ip+":3000/users/signup")
                 .post(formBody)
                 .build();
         client.newCall(request).enqueue(new Callback() {
@@ -105,22 +105,29 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String returnResponse =response.body().string();
-                Log.d("demo", "onResponse: User Created Success " + returnResponse);
-                Gson gson = new Gson();
-                TokenResponse tokenResponse = gson.fromJson(returnResponse,TokenResponse.class);
-                Log.d("demo", "onResponse: " +tokenResponse.toString());
+                final String returnResponse =response.body().string();
+                try {
+                    JSONObject jsonObject= new JSONObject(returnResponse);
+                    message=jsonObject.getString("message");
+                    token  = jsonObject.getString("token");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("demo", "onResponse: " + returnResponse);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         progressDialog.dismiss();
-                        Toast.makeText(RegisterActivity.this, "Signup Successfull please Login", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this,message, Toast.LENGTH_SHORT).show();
+
+                        Intent welcomePage = new Intent(RegisterActivity.this,WelcomeActivity.class);
+                        welcomePage.putExtra("token",token);
+                        startActivity(welcomePage);
+                        finish();
                     }
                 });
-                Intent welcomePage = new Intent(RegisterActivity.this,MainActivity.class);
-             //   welcomePage.putExtra("userInfo",newPerson);
-                startActivity(welcomePage);
-                finish();
             }
         });
     }

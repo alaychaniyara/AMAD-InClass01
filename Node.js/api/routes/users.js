@@ -7,6 +7,7 @@ const checkauth=require('../authorisation-token/check-auth');
 
 const User= require('../models/user');
 var token=null;
+var newtoken=null;
 userdata= new User();
     router.get("/", (req, res, next) => {
     return res.status(200).json({
@@ -43,10 +44,23 @@ router.post("/signup", (req, res, next) => {
                         user
                             .save()
                             .then(result => {
+
+                                newtoken = jwt.sign(
+                                    {
+                                        userId: user[0]._id,
+                                        email: user[0].email,
+
+
+                                    },
+                                    process.env.NEW_JWT_KEY,
+                                    {
+                                        expiresIn: "1h"
+                                    }
+                                );
                                 console.log(result);
                                 res.status(201).json({
-                                    message: "New User Succesfully Created"
-
+                                    message: "New User Succesfully Created",
+                                    token:newtoken
                                 });
                             })
                             .catch(err => {
@@ -84,10 +98,6 @@ router.post("/login", (req, res, next) => {
                         {
                             userId: user[0]._id,
                             email: user[0].email,
-                            name: user[0].name,
-                            age: user[0].age,
-                            dateofbirth: user[0].dateofbirth,
-                            address: user[0].address
 
                         },
                         process.env.JWT_KEY,
@@ -153,6 +163,7 @@ router.get("/userinfo",checkauth,(req, res, next) => {
 });
 //To Update the User Info
 router.patch("/updateuser",checkauth, (req, res, next) => {
+    console.log(req);
     const id = res.udata.userId;
     const updateOps = {};
     for (const ops of req.body) {

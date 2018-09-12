@@ -16,7 +16,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-//import inclass1.group3.group3_inclass01.data.Person;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -28,6 +27,7 @@ import okhttp3.Response;
 
   public class MainActivity extends AppCompatActivity {
 
+      static String api_ip="52.204.170.1";
     EditText userLogin,userPwd;
     private final OkHttpClient client = new OkHttpClient();
       JSONObject tokenobject;
@@ -79,14 +79,9 @@ import okhttp3.Response;
 
           RequestBody formBody = RequestBody.create(JSON,jsonObject.toString());
 
-                 /*RequestBody formBody = new FormBody.Builder()
-                  .add("email", userId)
-                  .add("password", password)
-                  .build();*/
           final Request request = new Request.Builder()
-                  .url("http://52.23.253.255:3000/users/login")
+                  .url("http://"+api_ip+":3000/users/login")
 
-//                          url("ec2-18-205-114-207.compute-1.amazonaws.com/api/signUp")
                   .post(formBody)
                   .build();
           client.newCall(request).enqueue(new Callback() {
@@ -96,30 +91,17 @@ import okhttp3.Response;
               }
               @Override
               public void onResponse(Call call, Response response) throws IOException {
-                 // String returnResponse =response.body().get("");
                   try {
-                    tokenobject  = new JSONObject(String.valueOf(response));
+                      String s=response.body().string();
+                    tokenobject  = new JSONObject(s);
                       token  = tokenobject.getString("token");
+                      Log.d("testtest",token);
 
                   } catch (JSONException e) {
                       e.printStackTrace();
                   }
 
-             //     String token=  returnResponse.split("token:",1).toString();
-                  Log.d("demo", "onResponse: Login Success " + response.body().string());
-//                  Toast.makeText(MainActivity.this,"Welcome TO APP",Toast.LENGTH_SHORT).show();
-               //   Gson gson = new Gson();
-                 //   gson.fromJson(returnResponse,);
-                 /* Gson gson = new Gson();
-                  TokenResponse tokenResponse = gson.fromJson(returnResponse,TokenResponse.class);
-                  Log.d("demo", "onResponse: " +tokenResponse.toString());
-                  Person user = new Person();
-                  user.setUserId(userId);
-                  user.setPassword(password);
-                  user.setUserName(tokenResponse.getUserName());
-                  user.setAge(Integer.parseInt(tokenResponse.getAge()));
-                  user.setWeight(Double.parseDouble(tokenResponse.getWeight()));
-                  */Intent mainPage = new Intent(MainActivity.this,WelcomeActivity.class);
+                  Intent mainPage = new Intent(MainActivity.this,WelcomeActivity.class);
                  mainPage.putExtra("token",token);
                   startActivity(mainPage);
                   finish();

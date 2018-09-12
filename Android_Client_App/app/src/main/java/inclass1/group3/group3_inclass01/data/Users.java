@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Users implements Serializable {
-   public ArrayList<User> user;
-    public static class User {
+  public User user;
+  public static class User {
         String _id, email, password, name, age, dateofbirth, address, __v;
 
         //   private String userName,userId,password;
@@ -13,21 +13,21 @@ public class Users implements Serializable {
         //private double weight;
 
 
-        @Override
-        public String toString() {
-            return "Person{" +
-                    "_id='" + _id + '\'' +
-                    ", email='" + email + '\'' +
-                    ", password='" + password + '\'' +
-                    ", name='" + name + '\'' +
-                    ", age='" + age + '\'' +
-                    ", dateofbirth='" + dateofbirth + '\'' +
-                    ", address='" + address + '\'' +
-                    ", __v='" + __v + '\'' +
-                    '}';
-        }
+      @Override
+      public String toString() {
+          return "User{" +
+                  "_id='" + _id + '\'' +
+                  ", email='" + email + '\'' +
+                  ", password='" + password + '\'' +
+                  ", name='" + name + '\'' +
+                  ", age='" + age + '\'' +
+                  ", dateofbirth='" + dateofbirth + '\'' +
+                  ", address='" + address + '\'' +
+                  ", __v='" + __v + '\'' +
+                  '}';
+      }
 
-        public String get_id() {
+      public String get_id() {
             return _id;
         }
 

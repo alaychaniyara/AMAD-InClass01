@@ -183,5 +183,13 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="115dp"
         android:text="Update"
-        android:visibility="invisible"/>
+        />
+
+    <Button
+        android:id="@+id/buttonEditData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btnUpdate"
+        android:layout_alignTop="@+id/btnUpdate"
+        android:text="Button" />
 </RelativeLayout>
