@@ -213,7 +213,7 @@ router.get("/allusers", (req, res, next) => {
         .then(docs => {
             const response = {
                 count: docs.length,
-                products: docs.map(doc => {
+                users: docs.map(doc => {
                     return {
                         email: doc.email,
                         name: doc.name,
