@@ -8,7 +8,7 @@ const checkauth=require('../authorisation-token/check-auth');
 const Survey= require('../models/survey');
 var token=null;
 var newtoken=null;
-surveydata= new surveyData();
+//surveydata= new surveyData();
 router.get("/", (req, res, next) => {
     return res.status(200).json({
         message: "Welcome to all surveys"
