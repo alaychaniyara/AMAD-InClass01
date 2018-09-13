@@ -8,7 +8,7 @@ const checkauth=require('../authorisation-token/check-auth');
 const Survey= require('../models/survey');
 var token=null;
 var newtoken=null;
-surveyData= new surveyData();
+surveydata= new surveyData();
 router.get("/", (req, res, next) => {
     return res.status(200).json({
         message: "Welcome to all surveys"
@@ -17,7 +17,7 @@ router.get("/", (req, res, next) => {
 
 
 //Insert Survey response to Database
-router.post("/savesurvey", checkAuth, (req, res, next) => {
+router.post("/savesurvey", checkauth, (req, res, next) => {
     const newsurvey = new Survey({
         _id: new mongoose.Types.ObjectId(),
         survey_id:res.udata.email+(Math.random()*(Math.floor(99999)-Math.ceil(1)))+req.body.user_score,
