@@ -2,7 +2,6 @@
   "env": {
     "MONGO_ATLAS_PW": "amadinclass01",
     "JWT_KEY":"secretkey",
-    "NEW_JWT_KEY":"thisisamadsecretcoding",
     "PORT":80
   }
 }

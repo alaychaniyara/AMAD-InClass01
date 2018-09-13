@@ -41,6 +41,7 @@ public class WelcomeActivity extends AppCompatActivity {
     EditText name,email,pwd,age,address,dateofbirth;
     Users.User userinfo;
     String message ;
+    JSONObject tokenobject;
 
     TextView ageField, weightField,nameField;
     private final OkHttpClient client = new OkHttpClient();
@@ -212,38 +213,44 @@ public class WelcomeActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String returnResponse =response.body().string();
-                Log.d("demo", "onResponse: Login Success " + returnResponse);
+                String returnResponse = response.body().string();
+                if (response.code() == 200) {
+                    Log.d("demo", "onResponse: Login Success " + returnResponse);
 //                  Toast.makeText(MainActivity.this,"Welcome TO APP",Toast.LENGTH_SHORT).show();
 
-                 Gson gson = new Gson();
-                  Users tokenResponse = gson.fromJson(returnResponse,Users.class);
-                 userinfo=tokenResponse.user;
-            //    final ArrayList<Users.User> userinfo = tokenResponse.user;
-                runOnUiThread(new Runnable() {
-                  @Override
-                  public void run() {
-                      email.setText(userinfo.getEmail());
-                      name.setText(userinfo.getName());
-                      age.setText(userinfo.getAge());
-                      dateofbirth.setText(userinfo.getDateofbirth());
-                      address.setText(userinfo.getAddress());
+                    Gson gson = new Gson();
+                    Users tokenResponse = gson.fromJson(returnResponse, Users.class);
+                    userinfo = tokenResponse.user;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            email.setText(userinfo.getEmail());
+                            name.setText(userinfo.getName());
+                            age.setText(userinfo.getAge());
+                            dateofbirth.setText(userinfo.getDateofbirth());
+                            address.setText(userinfo.getAddress());
 
-                  }
-                });
-                //  runOnUiThread(new);
-                //Log.d("demo", "onResponse: " +tokenResponse.toString());
-                //  Users.User user = tokenResponse.user;
-                 // user.set_id();
-                /*
-                  user.set_id(password);
-                  user.setUserName(tokenResponse.getUserName());
-                  user.setAge(Integer.parseInt(tokenResponse.getAge()));
-                  user.setWeight(Double.parseDouble(tokenResponse.getWeight()));
-                  Intent mainPage = new Intent(MainActivity.this,WelcomeActivity.class);
-                 mainPage.putExtra("userInfo",user);
-                startActivity(mainPage);
-                finish();*/
+                        }
+                    });
+
+                }
+                else
+                {
+                    try {
+                        tokenobject= new JSONObject(returnResponse);
+
+                        message=tokenobject.getString("message");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(WelcomeActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
     }

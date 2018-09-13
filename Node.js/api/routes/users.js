@@ -52,13 +52,13 @@ router.post("/signup", (req, res, next) => {
 
 
                                     },
-                                    process.env.NEW_JWT_KEY,
+                                    process.env.JWT_KEY,
                                     {
                                         expiresIn: "1h"
                                     }
                                 );
                                 console.log(result);
-                                res.status(201).json({
+                                res.status(200).json({
                                     message: "New User Succesfully Created",
                                     token:newtoken
                                 });
