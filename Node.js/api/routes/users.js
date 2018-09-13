@@ -32,7 +32,7 @@ router.post("/signup", (req, res, next) => {
                             error: hasherror
                         });
                     } else {
-                        const user = new User({
+                         user = new User({
                             _id: new mongoose.Types.ObjectId(),
                             email: req.body.email,
                             password: hash,
@@ -47,8 +47,8 @@ router.post("/signup", (req, res, next) => {
 
                                 newtoken = jwt.sign(
                                     {
-                                        userId: user[0]._id,
-                                        email: user[0].email,
+                                        userId: user._id,
+                                        email: user.email,
 
 
                                     },

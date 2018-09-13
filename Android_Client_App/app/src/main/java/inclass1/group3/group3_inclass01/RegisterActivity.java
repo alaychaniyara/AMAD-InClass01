@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                 progressDialog.setTitle("Registering user... please wait");
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 progressDialog.show();
-                Log.d("123456",newPerson.toString());
+      //          Log.d("123456",newPerson.toString());
                 performRegister(newPerson);
             }
         });
