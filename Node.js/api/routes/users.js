@@ -204,6 +204,43 @@ router.delete("/:userId", (req, res, next) => {
             });
         });
 });
+
+//To View List of All Users and their info
+router.get("/allusers", (req, res, next) => {
+    User.find()
+        .select("email name _id age address dateofbirth")
+        .exec()
+        .then(docs => {
+            const response = {
+                count: docs.length,
+                products: docs.map(doc => {
+                    return {
+                        email: doc.email,
+                        name: doc.name,
+                        _id: doc._id,
+                        age: doc.age,
+                        address: doc.address,
+                        dateofbirth: doc.dateofbirth
+                    };
+                })
+            };
+            if (docs.length <= 0) {
+                res.status(404).json({
+                    message: 'No entries found'
+                });
+            } else {
+            //   if (docs.length >= 0) {
+            res.status(200).json(response);
+            }
+        })
+
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
 module.exports = router;
 
 
