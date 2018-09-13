@@ -4,7 +4,7 @@ const morgan= require('morgan');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const userRoutes= require('./api/routes/users');
-const userRoutes= require('./api/routes/survey');
+const surveyRoutes= require('./api/routes/survey');
 try{
  mongoose.connect(
      'mongodb+srv://amad-user:'+process.env.MONGO_ATLAS_PW+'@advance-mad-6lt06.mongodb.net/test?retryWrites=true',
