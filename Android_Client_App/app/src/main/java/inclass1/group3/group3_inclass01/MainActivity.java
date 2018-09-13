@@ -31,6 +31,7 @@ import okhttp3.Response;
     EditText userLogin,userPwd;
     private final OkHttpClient client = new OkHttpClient();
       JSONObject tokenobject;
+      String message ;
       String token;
 
       @Override
@@ -91,8 +92,11 @@ import okhttp3.Response;
               }
               @Override
               public void onResponse(Call call, Response response) throws IOException {
+                 int status_code =response.code();
+                  String s=response.body().string();
+                  if(status_code==200)
+                 {
                   try {
-                      String s=response.body().string();
                     tokenobject  = new JSONObject(s);
                       token  = tokenobject.getString("token");
                       Log.d("testtest",token);
@@ -105,6 +109,24 @@ import okhttp3.Response;
                  mainPage.putExtra("token",token);
                   startActivity(mainPage);
                   finish();
+              }
+
+              else
+              {   try {
+                      tokenobject= new JSONObject(s);
+
+                     message=tokenobject.getString("message");
+                  } catch (JSONException e) {
+                      e.printStackTrace();
+                  }
+
+                  runOnUiThread(new Runnable() {
+                      @Override
+                      public void run() {
+                          Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                      }
+                  });
+              }
               }
           });
       }

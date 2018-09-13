@@ -91,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         RequestBody formBody = RequestBody.create(JSON,jsonObject.toString());
 
-        Request request = new Request.Builder()
+        final Request request = new Request.Builder()
                 .url("http://"+api_ip+":3000/users/signup")
                 .post(formBody)
                 .build();
@@ -106,7 +106,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String returnResponse =response.body().string();
-                try {
+                if (response.code()==200)
+
+                {
+                    try {
                     JSONObject jsonObject= new JSONObject(returnResponse);
                     message=jsonObject.getString("message");
                     token  = jsonObject.getString("token");
@@ -128,6 +131,27 @@ public class RegisterActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+                }
+                else
+                {
+                    try {
+                        JSONObject jsonObject= new JSONObject(returnResponse);
+
+                        message=jsonObject.getString("message");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                            Toast.makeText(RegisterActivity.this,message, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
             }
         });
     }

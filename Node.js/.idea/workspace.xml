@@ -4,25 +4,6 @@
     <list default="true" id="28ea3c87-167b-425b-ad3d-ccf9931a5303" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Android_Client_App/app/src/main/java/inclass1/group3/group3_inclass01/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_Client_App/app/src/main/java/inclass1/group3/group3_inclass01/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Android_Client_App/app/src/main/java/inclass1/group3/group3_inclass01/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_Client_App/app/src/main/java/inclass1/group3/group3_inclass01/RegisterActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android_Client_App/app/src/main/java/inclass1/group3/group3_inclass01/TokenResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_Client_App/app/src/main/java/inclass1/group3/group3_inclass01/TokenResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android_Client_App/app/src/main/java/inclass1/group3/group3_inclass01/WelcomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_Client_App/app/src/main/java/inclass1/group3/group3_inclass01/WelcomeActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android_Client_App/app/src/main/java/inclass1/group3/group3_inclass01/data/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_Client_App/app/src/main/java/inclass1/group3/group3_inclass01/data/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android_Client_App/app/src/main/res/layout/activity_welcome.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_Client_App/app/src/main/res/layout/activity_welcome.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mongoose/History.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mongoose/History.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mongoose/lib/document.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mongoose/lib/document.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mongoose/lib/helpers/query/castUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mongoose/lib/helpers/query/castUpdate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mongoose/lib/helpers/updateValidators.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mongoose/lib/helpers/updateValidators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mongoose/lib/model.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mongoose/lib/model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mongoose/lib/query.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mongoose/lib/query.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mongoose/lib/schematype.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mongoose/lib/schematype.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mongoose/lib/types/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mongoose/lib/types/map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mongoose/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/mongoose/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/nodemon.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -75,9 +56,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/routes/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="61" column="76" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
+            <state relative-caret-position="-1437">
+              <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
               <folding>
+                <element signature="e#276#1980#0" />
                 <element signature="e#5095#5739#0" />
               </folding>
             </state>
@@ -294,7 +276,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27625000" />
+    <option name="totallyTimeSpent" value="28069000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="69" y="22" width="1178" height="696" extended-state="0" />
@@ -403,9 +385,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="61" column="76" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
+        <state relative-caret-position="-1437">
+          <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
           <folding>
+            <element signature="e#276#1980#0" />
             <element signature="e#5095#5739#0" />
           </folding>
         </state>
